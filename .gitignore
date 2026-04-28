@@ -7,5 +7,6 @@ venv/
 env/
 ENV/
 *.pt
+!license_plate_detector.pt
 .vscode/
 .idea/

@@ -24,9 +24,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load YOLO model (nano version for CPU/Render compatibility)
-# Assuming yolov8n.pt will be downloaded on first run or during Docker build
-model = YOLO('yolov8n.pt')
+# Load YOLO model (License Plate Detector version)
+# Ensure license_plate_detector.pt is in the same directory
+model = YOLO('license_plate_detector.pt')
 
 # Regex for Brazilian Mercosul Plate: AAA1A23
 PLATE_REGEX = re.compile(r'[A-Z]{3}[0-9][A-Z][0-9]{2}')

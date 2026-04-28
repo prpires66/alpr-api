@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libtesseract-dev \
     libgl1 \
     libglib2.0-0 \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -15,11 +16,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download yolov8n.pt model during build to avoid downloading on first request in Render
-RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
-
 # Copy application code
 COPY main.py .
+
+# Download the custom model from Hugging Face during build
+RUN wget -O license_plate_detector.pt https://huggingface.co/Koushim/yolov8-license-plate-detection/resolve/main/best.pt
 
 # Expose port
 ENV PORT=8000
